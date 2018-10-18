@@ -19,3 +19,5 @@ Route::get('import', 'ImportController@index');
 Route::post('import/excel', 'ImportController@store')->name('import');
 
 Route::get('export/excel', 'ImportController@export')->name('export');
+
+Route::post('import/csv', 'ImportController@storeCsv')->name('import.csv');

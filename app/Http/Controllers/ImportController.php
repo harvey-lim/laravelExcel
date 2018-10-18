@@ -43,6 +43,26 @@ class ImportController extends Controller
         
     }
 
+    public function storeCsv(Request $request){
+        // dd($request->all());
+        // dd(fopen($request->csv_file, 'r'));
+        // dd(fgetcsv(fopen($request->csv_file, "r")));
+        $row = 1;
+        if (($handle = fopen($request->csv_file, "r")) !== false) {
+            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+                $num = count($data);
+                
+                for ($c = 0; $c < $num; $c++) {
+                    if($row == 1){
+                        echo $data[$c] . "<br />\n";
+                    }
+                }
+                $row++;
+            }
+            fclose($handle);
+        }
+    }
+
     public function export(){
         return Excel::download(new BusinessesExport, 'businesses.ods');
     }
